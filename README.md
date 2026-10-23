@@ -1,5 +1,5 @@
 The is my readme file
-happy coding........
+happy coding...
 
 coding livestream.: create an online chat app w/Python
 progressive timestamp: 27:48
