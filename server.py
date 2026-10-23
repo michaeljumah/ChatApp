@@ -1,5 +1,6 @@
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
+import time
 
 #GLOBAL VARIABLES
 HOST = 'localhost'
@@ -7,6 +8,10 @@ PORT = 5500
 ADDR = (HOST, PORT)
 MAX_CONNECTIONS = 10
 BUFSIZ = 1024
+
+
+
+def broadcast()
 
 
 def client_communication(client):
@@ -21,6 +26,7 @@ def client_communication(client):
         if msg == bytes("{quit}", "utf8"):
             client.close()
         else:
+            pass
 
 
 
@@ -37,14 +43,13 @@ def wait_for_connection(SERVER):
     while run:
         try:
             client, addr = SERVER.accept()
+            print(f"[CONNECTION] {addr} connected to server at {time.time()}")
             Thread(target=client_communication, args=(client,)).start()
         except Exception as e:
             print("[FAILURE]")
-            run = false
+            run = False
 
-
-
-
+    print("SERVER CRASHED")
 
 SERVER = socket(AF_INET, SOCK_STREAM)
 SERVER.bind(ADDR)
@@ -54,7 +59,7 @@ SERVER.bind(ADDR)
 if __name__ == "__main__":
     SERVER.listen(MAX_CONNECTIONS) #listen for 5 connections
     print("[STARTED] Waiting for connection...")
-    ACCEPT_THREAD = Thread(target=wait_for_connection, args=(SERVER,))
+    ACCEPT_THREAD = Thread(target=wait_for_connection)
     ACCEPT_THREAD.start()
     ACCEPT_THREAD.join()
     SERVER.close()
