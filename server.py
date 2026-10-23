@@ -4,17 +4,27 @@ import time
 from person import Person
 
 
-#GLOBAL VARIABLES
+#GLOBAL constants
 HOST = 'localhost'
 PORT = 5500
 ADDR = (HOST, PORT)
 MAX_CONNECTIONS = 10
 BUFSIZ = 1024
 
+#global variables
+persons = []
 
 
-def broadcast():
-    pass
+def broadcast(msg, name):
+    """
+    broadcast message to all clients
+    :param msg: bytes
+    :return: None
+    """
+    for person in persons:
+        client = person.client
+        client.send(bytes(name, "utf8") + msg)
+    
 
 
 def client_communication():
@@ -25,12 +35,21 @@ def client_communication():
     """
  
     client = person.client
-    name = person.name
     addr = person.addr
+
+    # get persons name
+    name = client.recv(BUFSIZ).decode("utf8")
+    msg = f"{name} has joined the chat!"
+    broadcast(bytes(msg, "utf8"))
+
+
     while True:
         msg = person.recv(BUFSIZ)
         if msg == bytes("{quit}", "utf8"):
+            client.send(bytes("{quit}", "utf8"))
             client.close()
+
+            persons.remove(person)
         else:
             pass
 
@@ -50,6 +69,7 @@ def wait_for_connection(SERVER):
         try:
             client, addr = SERVER.accept()
             person = Person(addr, client)
+            persons.append(person)
             print(f"[CONNECTION] {addr} connected to server at {time.time()}")
             Thread(target=client_communication, args=(person,)).start()
         except Exception as e:
