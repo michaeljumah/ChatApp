@@ -1,6 +1,8 @@
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 import time
+from person import Person
+
 
 #GLOBAL VARIABLES
 HOST = 'localhost'
@@ -11,25 +13,29 @@ BUFSIZ = 1024
 
 
 
-def broadcast()
+def broadcast():
+    pass
 
 
-def client_communication(client):
+def client_communication():
     """
     Thread to handle all messages from client
-    :param client: SOCKET
+    :param client: Person
     :RETURN: None 
     """
-    run = True 
-    while run:
-        msg = client.recv(BUFSIZ)
+ 
+    client = person.client
+    name = person.name
+    addr = person.addr
+    while True:
+        msg = person.recv(BUFSIZ)
         if msg == bytes("{quit}", "utf8"):
             client.close()
         else:
             pass
 
 
-
+ 
 
 
 
@@ -43,8 +49,9 @@ def wait_for_connection(SERVER):
     while run:
         try:
             client, addr = SERVER.accept()
+            person = Person(addr, client)
             print(f"[CONNECTION] {addr} connected to server at {time.time()}")
-            Thread(target=client_communication, args=(client,)).start()
+            Thread(target=client_communication, args=(person,)).start()
         except Exception as e:
             print("[FAILURE]")
             run = False

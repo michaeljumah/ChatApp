@@ -1,8 +1,8 @@
 class Person:
-    def __init__(self, addr, name, client):
+    def __init__(self, addr, client):
         self.addr = addr
-        self.name = name
         self.client = client
+        self.name = None
 
 
     def __repr__(self):
