@@ -6,7 +6,7 @@ from person import Person
 
 #GLOBAL constants
 HOST = 'localhost'
-PORT = 5500
+PORT = 6000
 ADDR = (HOST, PORT)
 MAX_CONNECTIONS = 10
 BUFSIZ = 1024
