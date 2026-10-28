@@ -14,7 +14,7 @@ BUFSIZ = 1024
 #global variables
 persons = []
 SERVER = socket(AF_INET, SOCK_STREAM)
-SERVER.bind(ADDR)
+SERVER.bind(ADDR)   #set up server socket
 
 def broadcast(msg, name):
     """
