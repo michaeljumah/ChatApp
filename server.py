@@ -23,7 +23,7 @@ def broadcast(msg, name):
     """
     for person in persons:
         client = person.client
-        client.send(bytes(name, "utf8") + msg)
+        client.send(bytes(name + ": ",  + msg))
     
 
 
