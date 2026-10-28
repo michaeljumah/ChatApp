@@ -53,7 +53,7 @@ def client_communication():
 
             persons.remove(person)
         else:
-            pass
+            
 
 
  
