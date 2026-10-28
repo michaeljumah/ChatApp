@@ -84,7 +84,7 @@ SERVER.bind(ADDR)
 
 
 if __name__ == "__main__":
-    SERVER.listen(MAX_CONNECTIONS) #listen for 5 connections
+    SERVER.listen(MAX_CONNECTIONS) #listen for maximum connections
     print("[STARTED] Waiting for connection...")
     ACCEPT_THREAD = Thread(target=wait_for_connection)
     ACCEPT_THREAD.start()
