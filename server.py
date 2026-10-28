@@ -17,6 +17,7 @@ SERVER = socket(AF_INET, SOCK_STREAM)
 SERVER.bind(ADDR)   #set up server socket
 
 def broadcast(msg, name):
+
     """
     broadcast message to all clients
     :param msg: bytes
@@ -40,7 +41,7 @@ def client_communication():
 
     # get persons name
     name = client.recv(BUFSIZ).decode("utf8")
-    msg = f"{name} has joined the chat!"
+    msg = f"{name} has joined the ROOM!"
     broadcast(bytes(msg, "utf8"))
 
 
